@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NSS — Heritage Institute of Technology</title>
+
+<style>
+:root {
+  /* ===== New Blue Coolors Palette ===== */
+  --c1:#e3f2fd;
+  --c2:#bbdefb;
+  --c3:#90caf9;
+  --c4:#64b5f6;
+  --c5:#42a5f5;
+  --c6:#2196f3;
+  --c7:#1e88e5;
+  --c8:#1976d2;
+  --c9:#1565c0;
+  --c10:#0d47a1;
+
+  /* ===== Background Controls ===== */
+  --bg-image: url('uyfydu6.jpg');  /* ← Replace with your image */
+  --bg-opacity: 0.35;                      /* 0 → fully visible image, 1 → fully tinted */
+  --bg-blur: 6px;                          /* background blur intensity */
+
+  --text-light: rgba(255,255,255,0.95);
+  --text-muted: rgba(255,255,255,0.75);
+  --glass: rgba(255,255,255,0.08);
+  --radius: 20px;
+  font-family: "Inter", sans-serif;
+}
+
+/* ===== BACKGROUND LAYERS ===== */
+body {
+  margin: 0;
+  background: var(--bg-image) center/cover no-repeat fixed;
+  color: var(--text-light);
+  overflow-x: hidden;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    linear-gradient(180deg, rgba(13,71,161,var(--bg-opacity)), rgba(21,101,192,var(--bg-opacity))),
+    radial-gradient(circle at 30% 30%, rgba(66,165,245,0.25), transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(25,118,210,0.25), transparent 50%);
+  backdrop-filter: blur(var(--bg-blur));
+  animation: auroraMove 14s ease-in-out infinite alternate;
+  z-index: -1;
+}
+@keyframes auroraMove {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(40px,30px); }
+}
+
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 50px 20px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  padding: 20px 30px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+  margin-bottom: 50px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.header-left img {
+  width: 85px;
+  height: 85px;
+  object-fit: contain;
+}
+
+.header-left h1 {
+  font-size: 1.4rem;
+  margin: 0;
+  color: var(--c2);
+}
+
+.header-left p {
+  margin: 3px 0 0 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Event box */
+.event-box {
+  background: linear-gradient(135deg, var(--c7), var(--c5));
+  color: white;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  min-width: 230px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.event-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+.event-title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: var(--c2);
+}
+.event-detail {
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+/* ===== SECTION ===== */
+section {
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius);
+  padding: 45px 40px;
+  margin-bottom: 60px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+}
+
+h2 {
+  color: var(--c3);
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+p {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ===== GALLERY ===== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.gallery-item {
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+.gallery-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.gallery-item:hover img { transform: scale(1.1); }
+.gallery-item:hover { transform: translateY(-8px); }
+.gallery-item .cap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.6));
+  color: white;
+  font-size: 0.9rem;
+}
+
+/* ===== FACULTY ===== */
+.faculty-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  perspective: 800px;
+}
+.faculty {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 14px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+.faculty:hover {
+  transform: rotateY(10deg) rotateX(6deg) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+.faculty img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  object-fit: cover;
+  border: 3px solid var(--c4);
+}
+.faculty h3 { margin: 5px 0; color: var(--c3); }
+
+/* ===== TEAM ===== */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  perspective: 800px;
+}
+.person {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(255,255,255,0.05);
+  padding: 15px;
+  border-radius: 12px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+.person:hover {
+  transform: rotateY(-8deg) rotateX(5deg) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+.person img {
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid var(--c5);
+}
+.person h3 { margin: 0; font-size: 1rem; color: var(--c3);}
+.person p { margin: 4px 0 0 0; font-size: 0.9rem; }
+
+/* ===== PAST EVENTS ===== */
+.past-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.past-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+  padding: 12px 18px;
+  border-radius: 10px;
+}
+.date { color: var(--c4); font-weight: 600; }
+
+/* ===== PREVIOUS COORDINATORS ===== */
+details {
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+summary {
+  cursor: pointer;
+  padding: 15px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.05);
+}
+details[open] summary { background: var(--c7); color: white; }
+.details-content { padding: 10px 20px 20px; color: var(--text-muted); }
+.details-content strong { color: var(--c3); }
+
+/* ===== CONTACT ===== */
+.contact a {
+  display: inline-block;
+  padding: 12px 20px;
+  background: linear-gradient(90deg, var(--c7), var(--c5));
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ===== CURSOR BLUR ===== */
+.cursor-blur {
+  position: fixed;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(66,165,245,0.45), transparent 70%);
+  filter: blur(25px);
+  mix-blend-mode: screen;
+  opacity: 0.7;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 30px;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.9rem;
+}
+</style>
+</head>
+<body>
+<main>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <img src="NSS logo.png" alt="NSS Logo" />
+      <div>
+        <h1>National Service Scheme</h1>
+        <p>Heritage Institute of Technology, Kolkata</p>
+      </div>
+    </div>
+
+    <div class="event-box">
+      <div class="event-title">Upcoming Event</div>
+      <div class="event-detail">🩸 Blood Donation Drive</div>
+      <div class="event-detail">📅 12 Dec 2025</div>
+      <div class="event-detail">🕘 9:00 AM – 3:00 PM</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About NSS — Heritage Institute of Technology</h2>
+    <p>
+      The NSS unit of Heritage Institute of Technology fosters community service, leadership, and social responsibility among students.
+      Through blood donation camps, environmental drives, and rural outreach initiatives, we aim to create compassionate leaders
+      and meaningful change in society.
+    </p>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="gallery\WhatsApp Image 2025-08-22 at 20.50.21_df32b91a.jpg"><div class="cap">Health Camp</div></div>
+      <div class="gallery-item"><img src="gallery\Screenshot 2025-08-22 201044.png"><div class="cap">Tree Plantation</div></div>
+      <div class="gallery-item"><img src="gallery\st.jpg"><div class="cap">Clean-Up Drive</div></div>
+      <div class="gallery-item"><img src="gallery\toi.jpg"><div class="cap">Awareness Rally</div></div>
+      <div class="gallery-item"><img src="gallery\WhatsApp Image 2025-08-22 at 20.41.02_cc8145a0.jpg"><div class="cap">Blood Donation</div></div>
+      <div class="gallery-item"><img src="gallery\nasha.jpg"><div class="cap">Village Visit</div></div>
+    </div>
+  </section>
+
+  <!-- FACULTY -->
+  <section id="faculty">
+    <h2>Faculty Advisors</h2>
+    <div class="faculty-grid">
+      <div class="faculty">
+        <img src="faculty\Screenshot 2025-11-05 001407.png" alt="Faculty 1">
+        <h3>Mr. Clayton M Moses</h3>
+      </div>
+      <div class="faculty">
+        <img src="faculty\Screenshot 2025-11-05 001418.png" alt="Faculty 2">
+        <h3>Prof. ShibSankar Bhowmick</h3>
+      </div>
+      <div class="faculty">
+        <img src="faculty\Screenshot 2025-11-05 001430.png" alt="Faculty 3">
+        <h3>Prof. Jhalak Dutta</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team">
+    <h2>2025 Team Coordinators</h2>
+    <div class="team-grid">
+      <div class="person"><img src="coord\aich.jpg"><div><h3>Chayonika Aich</h3><p>President (4th Yr)</p></div></div>
+      <div class="person"><img src="coord\WhatsApp Image 2025-01-22 at 23.55.35_b45374b8.jpg"><div><h3>Praveen Kumar</h3><p>Vice President (4th Yr)</p></div></div>
+      <div class="person"><img src="coord\_MG_6733.jpg"><div><h3>Ram Kumar</h3><p>General Secretary (4th Yr)</p></div></div>
+      <div class="person"><img src="coord\20231024_100342-1.jpg"><div><h3>Kishan Kumar</h3><p>Treasurer (4th Yr)</p></div></div>
+      <div class="person"><img src="coord\me.jpg"><div><h3>Raunak Raj</h3><p>Design Coordinator (3rd Yr)</p></div></div>
+      <div class="person"><img src="coord\mohit.jpg"><div><h3>Mohit Soni</h3><p>Literacy Coordinator (3rd Yr)</p></div></div>
+      <div class="person"><img src="coord\IMG-20250122-WA0033.jpg"><div><h3>A.S Rastogi</h3><p>Sports Coordinator (3rd Yr)</p></div></div>
+      <div class="person"><img src="https://placehold.co/100x100/64b5f6/003049?text=RS"><div><h3>Mahima Vashisth</h3><p>PR and communication (3rd Yr)</p></div></div>
+      <div class="person"><img src="https://placehold.co/100x100/bbdefb/003049?text=LN"><div><h3>Shamaela Anjum</h3><p>Documentation Coordinator (3rd Yr)</p></div></div>
+      <div class="person"><img src="https://placehold.co/100x100/e3f2fd/003049?text=AB"><div><h3>Ruba Muntaha</h3><p>Art Craft coordinator (3rd Yr)</p></div></div>
+      <div class="person"><img src="https://placehold.co/100x100/2196f3/fff?text=PK"><div><h3>Aakif sultan</h3><p>Photography Coordinator (4th Yr)</p></div></div>
+    </div>
+  </section>
+
+  <!-- PAST EVENTS -->
+  <section id="past-events">
+    <h2>Past Events</h2>
+    <div class="past-list">
+      <div class="past-item"><span><strong>Blood Donation Camp</strong> </span><span class="date">Sep 2025</span></div>
+      <div class="past-item"><span><strong>Campus Clean-Up</strong></span><span class="date">Sep 2025</span></div>
+      <div class="past-item"><span><strong>Teaching unprivileged kids</strong></span><span class="date">Jul 2025</span></div>
+      <div class="past-item"><span><strong>Tree Plantation</strong></span><span class="date">Jun 2025</span></div>
+      <div class="past-item"><span><strong>Old Age Home Visit</strong></span><span class="date">Apr 2025</span></div>
+    </div>
+  </section>
+
+  <!-- PREVIOUS COORDINATORS -->
+  <section id="previous">
+    <h2>Previous Years' Coordinators</h2>
+    <details><summary>Batch 2024</summary><div class="details-content"><strong>President:</strong> Arjun Ghosh<br><strong>Vice President:</strong> Sneha Banerjee</div></details>
+    <details><summary>Batch 2023</summary><div class="details-content"><strong>President:</strong> Riya Das<br><strong>Vice President:</strong> Vivek Singh</div></details>
+    <details><summary>Batch 2022</summary><div class="details-content"><strong>President:</strong> Soumya Roy<br><strong>Vice President:</strong> Priyanka Sharma</div></details>
+    <details><summary>Batch 2021</summary><div class="details-content"><strong>President:</strong> Aditya Mukherjee<br><strong>Vice President:</strong> Neha Jain</div></details>
+    <details><summary>Batch 2020</summary><div class="details-content"><strong>President:</strong> Rahul Sinha<br><strong>Vice President:</strong> Snehal Patil</div></details>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:nss@heritage.edu.in" style="color:var(--c-100);">nss@heritage.edu.in</a><br>
+    Phone: +91 98765 43210<br>
+    Instagram: @nss_hitk </p>
+    <a href="mailto:nss@heritage.edu.in">Send Message</a>
+  </section>
+
+  <footer>© <span id="year"></span> NSS — Heritage Institute of Technology</footer>
+</main>
+
+<div class="cursor-blur" id="cursor"></div>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const b=document.getElementById('cursor');
+window.addEventListener('mousemove',e=>{
+  b.style.left=e.pageX+'px';
+  b.style.top=e.pageY+'px';
+});
+</script>
+</body>
+</html>
