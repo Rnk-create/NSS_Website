@@ -1,0 +1,7 @@
+# Hide everything by default
+*
+
+# But keep these files visible
+!index.html
+!README.md
+!.gitignore
